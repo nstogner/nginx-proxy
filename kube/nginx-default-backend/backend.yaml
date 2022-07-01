@@ -1,7 +1,14 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx-proxy-default-backend
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-proxy
+  namespace: nginx-proxy-default-backend
   labels:
     app: nginx-proxy
 spec:
@@ -23,3 +30,17 @@ spec:
         ports:
         - name: http
           containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-proxy
+  namespace: nginx-proxy-default-backend
+spec:
+  selector:
+    app: nginx-proxy
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http

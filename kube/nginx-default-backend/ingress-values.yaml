@@ -1,0 +1,4 @@
+controller:
+  extraArgs:
+    # Value should be of the format: <namespace>/<service-name>
+    default-backend-service: nginx-proxy-default-backend/nginx-proxy
